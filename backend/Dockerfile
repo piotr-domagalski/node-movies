@@ -3,10 +3,28 @@ WORKDIR /usr/app
 
 COPY ./package.json ./
 ENV NPM_CONFIG_LOGLEVEL=info
+
+# ts
+# TODO: which of these are dev?
 RUN ["npm", "install", "typescript", "@types/node"]
+RUN ["npm", "install", "prisma", "--save-dev"]
+RUN ["npm", "install", "@prisma/client", "@prisma/adapter-mariadb", "dotenv"]
+RUN ["npm", "install", "@t3-oss/env-nuxt", "zod"]
 
-COPY ./src ./src
+# prisma
+# TODO: which order? prisma first or sources first
+COPY ./prisma ./prisma
+RUN ["npx", "prisma", "generate"]
+COPY ./prisma.config.ts ./prisma.config.ts
+RUN ls prisma
+
 COPY ./tsconfig.json ./
+COPY ./src ./src
+# compile
 RUN ["npx", "tsc"]
+RUN ls
+RUN ls src
 
-ENTRYPOINT ["node", "dist/main.js"]
+WORKDIR /usr/app/dist
+#ENTRYPOINT ["node", "main.js"]
+ENTRYPOINT ["node", "prisma_test.js"]
