@@ -10,6 +10,7 @@ RUN ["npm", "install", "typescript", "@types/node"]
 RUN ["npm", "install", "prisma", "--save-dev"]
 RUN ["npm", "install", "@prisma/client", "@prisma/adapter-mariadb", "dotenv"]
 RUN ["npm", "install", "@t3-oss/env-nuxt", "zod"]
+RUN ["npm", "install", "express", "@types/express"]
 
 # prisma
 # TODO: which order? prisma first or sources first
@@ -26,5 +27,4 @@ RUN ls
 RUN ls src
 
 WORKDIR /usr/app/dist
-#ENTRYPOINT ["node", "main.js"]
-ENTRYPOINT ["node", "prisma_test.js"]
+ENTRYPOINT ["node", "main.js"]
