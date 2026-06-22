@@ -4,6 +4,7 @@ WORKDIR /usr/app
 COPY ./package.json ./
 ENV NPM_CONFIG_LOGLEVEL=info
 
+RUN ["apk", "add", "tini"]
 # ts
 # TODO: which of these are dev?
 RUN ["npm", "install", "typescript", "@types/node"]
@@ -20,10 +21,12 @@ RUN ["npx", "prisma", "generate"]
 COPY ./prisma.config.ts ./prisma.config.ts
 
 COPY ./tsconfig.json ./
-COPY ./src ./src
+COPY ./src/lib ./src/lib
+COPY ./src/*.ts ./src
 # compile
 RUN ["npx", "tsc"]
 COPY ./src/views ./dist/views
 
 WORKDIR /usr/app/dist
-ENTRYPOINT ["node", "main.js"]
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["node", "main.js"]

@@ -2,33 +2,37 @@ import { prisma } from "./lib/prisma.js";
 import express from "express";
 import path from "path";
 import * as controller from "./movies_controller.js";
-import db_init from "./db_init.js";
+import seed from "./seed.js";
 
 async function main() {
-    db_init();
+    seed();
 
     const app = express();
     const port = 8080;
 
+    app.use(express.urlencoded({ extended: true }));
     app.set("view engine", "ejs");
+
 
     let counter: number = 0;
 
     app.get('/', (req, res) => {
-        counter++;
-        console.log(`got a request. counter=${counter}`)
-        // res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.send(`Hello World!\nThis was the ${counter}th request I got.`);
+        res.redirect("/movies")
     });
 
-    app.get('/movies', controller.movies);
-    app.get('/movies/:id', controller.movieDetails);
-    app.get('/movies/:id/edit', controller.movieEdit);
-    app.get('/movies/:id/delete', controller.movieDelete);
-    app.get('/movies/create', controller.movieCreate);
+    app.get('/movies/create', controller.showCreateForm);
+    app.post('/movies/create', controller.createMovie);
+
+    app.get('/movies', controller.showMovieList);
+    app.get('/movies/:id', controller.showMovieDetails);
+
+    app.get('/movies/:id/edit', controller.showEditForm);
+    app.post('/movies/:id/edit', controller.updateMovie);
+
+    app.post('/movies/:id/delete', controller.deleteMovie);
 
     app.listen(port, () => {
-      console.log(`Example app listening on port ${port}`);
+      console.log(`Movies app listening on port ${port}`);
     });
 }
 

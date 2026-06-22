@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Movies App </title>
+    </head>
+    <body>
+        <%- include('header', {}); %>
+        <h1> <%= title %> </h1>
+
+        <form action="<%= action %>" method="post">
+            <label for="title"> Title </label>
+            <input type="text" id="title" name="title" value="<%= movie?.title ?? "" %>"> <br>
+            <label for="releaseDate"> Release Date </label> 
+            <input type="date" id="releaseDate" name="releaseDate" value="<%= movie?.releaseDate ?? "" %>"> <br>
+            <label for="genre"> Genre </label>
+            <input type="text" id="genre" name="genre" value="<%= movie?.genre ?? "" %>"> <br>
+            <label for="price"> Price </label>
+            <input type="number" step="any" id="price" name="price" value="<%= movie?.price ?? "" %>"> <br>
+            <input type="submit" id="submit" name="submit" value="<%= submitPrompt %>" >
+        </form>
+        <a href="/movies"> Return to list </a>
+        <%- include('footer', {}); %>
+    </body>
+</html>

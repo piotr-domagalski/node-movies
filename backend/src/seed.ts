@@ -1,6 +1,6 @@
 import { prisma } from "./lib/prisma.js";
 
-export default async function db_init() {
+export default async function seed() {
     console.log("seeding db...");
     const allMovies1 = await prisma.movie.findMany({});
 

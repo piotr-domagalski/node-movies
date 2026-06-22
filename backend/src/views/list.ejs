@@ -2,9 +2,16 @@
 <html>
     <head>
         <title> Movies App </title>
+        <script>
+        function confirmDelete(movie, id) {
+            return confirm(`Are you sure you want to delete ${movie} (id ${id})?`)
+        }
+        </script
     </head>
     <body>
         <%- include('header', {}); %>
+        <h1> Index </h1>
+        <a href="/movies/create"> Create New </a>
         <table>
             <tr>
                 <td> Title </td>
@@ -20,9 +27,11 @@
                 <td> <%= movie.genre %> </td>
                 <td> <%= movie.price %> </td>
                 <td>
-                    <a href=<%=`movies/${movie.id}/edit`%>> Edit </a> |
-                    <a href=<%=`movies/${movie.id}`%>> Details </a> |
-                    <a href=<%=`movies/${movie.id}/delete`%>> Delete </a>
+                    <a href=<%=`/movies/${movie.id}/edit`%>> Edit </a> |
+                    <a href=<%=`/movies/${movie.id}`%>> Details </a> |
+                    <form method="post", action="movies/<%=movie.id%>/delete">
+                        <input type="submit" value="Delete" onclick="return confirmDelete('<%=movie.title%>', '<%=movie.id%>');">
+                    </form>
                 </td>
             </tr>
         <% }); %>
