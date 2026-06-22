@@ -11,20 +11,19 @@ RUN ["npm", "install", "prisma", "--save-dev"]
 RUN ["npm", "install", "@prisma/client", "@prisma/adapter-mariadb", "dotenv"]
 RUN ["npm", "install", "@t3-oss/env-nuxt", "zod"]
 RUN ["npm", "install", "express", "@types/express"]
+RUN ["npm", "install", "ejs"]
 
 # prisma
 # TODO: which order? prisma first or sources first
 COPY ./prisma ./prisma
 RUN ["npx", "prisma", "generate"]
 COPY ./prisma.config.ts ./prisma.config.ts
-RUN ls prisma
 
 COPY ./tsconfig.json ./
 COPY ./src ./src
 # compile
 RUN ["npx", "tsc"]
-RUN ls
-RUN ls src
+COPY ./src/views ./dist/views
 
 WORKDIR /usr/app/dist
 ENTRYPOINT ["node", "main.js"]

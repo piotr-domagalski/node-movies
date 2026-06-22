@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Movies App </title>
+    </head>
+    <body>
+        <%- include('header', {}); %>
+        <table>
+            <tr>
+                <td> Title </td>
+                <td> Release Date </td>
+                <td> Genre </td>
+                <td> Price </td>
+                <td> </td>
+            </tr>
+        <% movies.forEach( movie => { %>
+            <tr>
+                <td> <%= movie.title %> </td>
+                <td> <%= movie.releaseDate %> </td>
+                <td> <%= movie.genre %> </td>
+                <td> <%= movie.price %> </td>
+                <td>
+                    <a href=<%=`movies/${movie.id}/edit`%>> Edit </a> |
+                    <a href=<%=`movies/${movie.id}`%>> Details </a> |
+                    <a href=<%=`movies/${movie.id}/delete`%>> Delete </a>
+                </td>
+            </tr>
+        <% }); %>
+        </table>
+        <%- include('footer', {}); %>
+    </body>
+</html>

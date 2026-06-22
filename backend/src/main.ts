@@ -1,7 +1,7 @@
 import {createServer, IncomingMessage, ServerResponse} from "http";
 import { prisma } from "./lib/prisma.js";
 import express from "express";
-
+import path from "path";
 
 async function db_init() {
     console.log("seeding db...");
@@ -42,6 +42,8 @@ async function main() {
     const app = express();
     const port = 8080;
 
+    app.set("view engine", "ejs");
+
     let counter: number = 0;
 
     app.get('/', (req, res) => {
@@ -52,10 +54,10 @@ async function main() {
     });
 
     app.get('/movies', async (req, res) => {
-        const movieNames = await prisma.movie.findMany({
-            select: { title: true }
-        })
-        res.send(JSON.stringify(movieNames, null, 2))
+        const movies = await prisma.movie.findMany({
+            //select: { id: true, title: true }
+        });
+        res.render("list", {movies: movies} );
     })
 
     app.get('/movies/:id', async (req, res) => {
