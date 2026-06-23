@@ -23,10 +23,10 @@ function hideElement(e) {
 
 export default function validate(form) {
     let errors = 0;
-    if (!checkStringAndFocus(form.elements["title"], "Title must be 3 to 60 characters in length and nonempty", fv.isTitleInvalid)) { errors++; }
-    if (!checkStringAndFocus(form.elements["releaseDate"], "Invalid release date", fv.isReleaseDateInvalid)) { errors++; }
-    if (!checkStringAndFocus(form.elements["genre"], `Genre must match the regex ${fv.genreRegex}`, fv.isGenreInvalid)) { errors++; }
-    if (!checkStringAndFocus(form.elements["price"], `Price must be between 1 and 100`, fv.isPriceInvalid)) { errors++; }
+    if (!checkStringAndFocus(form.elements["title"], fv.titleErrorMessage, fv.isTitleInvalid)) { errors++; }
+    if (!checkStringAndFocus(form.elements["releaseDate"], fv.releaseDateErrorMessage, fv.isReleaseDateInvalid)) { errors++; }
+    if (!checkStringAndFocus(form.elements["genre"], fv.genreErrorMessage, fv.isGenreInvalid)) { errors++; }
+    if (!checkStringAndFocus(form.elements["price"], fv.priceErrorMessage, fv.isPriceInvalid)) { errors++; }
 
     let summary = document.getElementById("validation-error-summary")
     if (errors != 0) {

@@ -1,8 +1,17 @@
 import * as repo from "./movies_repository.js";
 import express from "express";
+import * as fv from "./shared/fieldValidation.js";
 
 function toDateInputValue(date: Date) {
     return date.toISOString().split("T")[0]
+}
+
+function isEditRequestInvalid(body: { title: string, releaseDate: string, genre: string, price: string }) : string | null {
+    if (fv.isTitleInvalid(body.title)) { return fv.titleErrorMessage }
+    if (fv.isReleaseDateInvalid(body.releaseDate)) { return fv.releaseDateErrorMessage }
+    if (fv.isGenreInvalid(body.genre)) { return fv.genreErrorMessage }
+    if (fv.isPriceInvalid(body.price)) { return fv.priceErrorMessage }
+    return null;
 }
 
 export async function showMovieList(req: express.Request, res: express.Response) {
@@ -53,10 +62,14 @@ export async function showEditForm(req: express.Request, res: express.Response) 
 export async function updateMovie(req: express.Request, res: express.Response) {
     console.log("updateMovie()")
     const id: number = Number(req.params.id)
-    console.log(req.body)
-    const update = await repo.updateMovie(id, req.body.title, new Date(req.body.releaseDate), req.body.genre, req.body.price)
-    console.log(update)
-    res.redirect("/movies")
+    const error = isEditRequestInvalid(req.body)
+    if (error == null) {
+        const update = await repo.updateMovie(id, req.body.title, new Date(req.body.releaseDate), req.body.genre, req.body.price)
+        console.log(update)
+        res.redirect("/movies")
+    } else {
+        res.status(400).send(error)
+    }
 }
 
 export async function deleteMovie(req: express.Request, res: express.Response) {
@@ -79,8 +92,14 @@ export async function showCreateForm(req: express.Request, res: express.Response
 export async function createMovie(req: express.Request, res: express.Response) {
     console.log("createMovie()")
     console.log(req.body)
-    const create = await repo.createMovie(req.body.title, new Date(req.body.releaseDate), req.body.genre, req.body.price)
-    console.log(create)
-    res.redirect("/movies")
+    const error = isEditRequestInvalid(req.body)
+    console.log(error)
+    if (error == null) {
+        const create = await repo.createMovie(req.body.title, new Date(req.body.releaseDate), req.body.genre, req.body.price)
+        console.log(create)
+        res.redirect("/movies")
+    } else {
+        res.status(400).send(error)
+    }
 }
 
