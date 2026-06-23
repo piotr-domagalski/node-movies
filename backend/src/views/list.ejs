@@ -35,6 +35,7 @@
                     <td> Release Date </td>
                     <td> Genre </td>
                     <td> Price </td>
+                    <td> Rating </td>
                     <td colspan="3"> </td>
                 </thead>
                 <tbody>
@@ -44,6 +45,7 @@
                         <td> <%= movie.releaseDate %> </td>
                         <td> <%= movie.genre %> </td>
                         <td> <%= movie.price %> </td>
+                        <td> <%= movie.rating %> </td>
                         <td> <a class="list-action" href=<%=`/movies/${movie.id}/edit`%>> Edit </a> </td>
                         <td> <a class="list-action" href=<%=`/movies/${movie.id}`%>> Details </a> </td>
                         <td>

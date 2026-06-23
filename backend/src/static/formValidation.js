@@ -27,6 +27,7 @@ export default function validate(form) {
     if (!checkStringAndFocus(form.elements["releaseDate"], fv.releaseDateErrorMessage, fv.isReleaseDateInvalid)) { errors++; }
     if (!checkStringAndFocus(form.elements["genre"], fv.genreErrorMessage, fv.isGenreInvalid)) { errors++; }
     if (!checkStringAndFocus(form.elements["price"], fv.priceErrorMessage, fv.isPriceInvalid)) { errors++; }
+    if (!checkStringAndFocus(form.elements["rating"], fv.ratingErrorMessage, fv.isRatingInvalid)) { errors++; }
 
     let summary = document.getElementById("validation-error-summary")
     if (errors != 0) {

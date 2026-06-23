@@ -32,6 +32,11 @@
                         <td> <image class="validation-error-icon" id="priceError" src="/warningSmall.svg" style="visibility: hidden;"> </td>
                     </tr>
                     <tr>
+                        <td> <label for="rating"> Rating </label></td>
+                        <td class="edit-input-field"> <input type="text" id="rating" name="rating" value="<%= movie?.rating ?? "" %>"> <br> </td>
+                        <td> <image class="validation-error-icon" id="ratingError" src="/warningSmall.svg" style="visibility: hidden;"> </td>
+                    </tr>
+                    <tr>
                         <td colspan="3"> <p id="validation-error-summary" style="visibility: hidden;"> </td>
                     </tr>
                     <tr>

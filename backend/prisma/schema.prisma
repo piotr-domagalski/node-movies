@@ -13,5 +13,6 @@ model Movie {
     releaseDate DateTime @db.Date()
     genre String?
     price Decimal @db.Decimal(5, 2)
+    rating String?
     @@map("movies")
 }

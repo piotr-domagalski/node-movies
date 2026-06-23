@@ -15,6 +15,7 @@ export default async function seed() {
             releaseDate: new Date("2069-04-20"),
             genre: "Action",
             price: "13.37",
+            rating: "R",
         }
     });
     console.log("Created movie:", movie1);
@@ -25,6 +26,7 @@ export default async function seed() {
             releaseDate: new Date("1234-12-12"),
             genre: "Drama",
             price: "28.008",
+            rating: "PG",
         }
     });
     console.log("Created movie:", movie2);

@@ -8,6 +8,7 @@ export async function searchSummaries(genre: string | null = null, title: string
             releaseDate: true,
             genre: true,
             price: true,
+            rating: true,
         },
         where: {
             ...(genre ? { genre } : {}),
@@ -44,16 +45,16 @@ export async function deleteById(id: number) {
     });
 }
 
-export async function updateMovie(id: number, title: string, releaseDate: Date, genre: string, price: number) {
+export async function updateMovie(id: number, title: string, releaseDate: Date, genre: string, price: number, rating: string) {
     return await prisma.movie.update({
         where: { id: id },
-        data: { title, releaseDate, genre, price },
+        data: { title, releaseDate, genre, price, rating },
     });
 }
 
-export async function createMovie(title: string, releaseDate: Date, genre: string, price: number) {
+export async function createMovie(title: string, releaseDate: Date, genre: string, price: number, rating: string) {
     return await prisma.movie.create({
-        data: { title, releaseDate, genre, price },
+        data: { title, releaseDate, genre, price, rating },
     });
 }
 

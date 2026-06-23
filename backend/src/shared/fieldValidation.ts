@@ -25,3 +25,9 @@ export function isPriceInvalid(price: string) {
     const number = Number(price);
     return number < 1 || number > 100;
 }
+
+const ratingRegex = /^[A-Z]+[a-zA-Z0-9""'\s-]*$/;
+export const ratingErrorMessage = `Rating must match the regex ${ratingRegex}`;
+export function isRatingInvalid(rating: string) {
+    return !(ratingRegex.test(rating));
+}

@@ -6,11 +6,12 @@ function toDateInputValue(date: Date) {
     return date.toISOString().split("T")[0]
 }
 
-function isEditRequestInvalid(body: { title: string, releaseDate: string, genre: string, price: string }) : string | null {
+function isEditRequestInvalid(body: { title: string, releaseDate: string, genre: string, price: string, rating: string }) : string | null {
     if (fv.isTitleInvalid(body.title)) { return fv.titleErrorMessage }
     if (fv.isReleaseDateInvalid(body.releaseDate)) { return fv.releaseDateErrorMessage }
     if (fv.isGenreInvalid(body.genre)) { return fv.genreErrorMessage }
     if (fv.isPriceInvalid(body.price)) { return fv.priceErrorMessage }
+    if (fv.isRatingInvalid(body.rating)) { return fv.ratingErrorMessage }
     return null;
 }
 
@@ -75,7 +76,14 @@ export async function updateMovie(req: express.Request, res: express.Response) {
     const id: number = Number(req.params.id)
     const error = isEditRequestInvalid(req.body)
     if (error == null) {
-        const update = await repo.updateMovie(id, req.body.title, new Date(req.body.releaseDate), req.body.genre, req.body.price)
+        const update = await repo.updateMovie(
+            id,
+            req.body.title,
+            new Date(req.body.releaseDate),
+            req.body.genre,
+            req.body.price,
+            req.body.rating
+        )
         console.log(update)
         res.redirect("/movies")
     } else {
@@ -106,7 +114,13 @@ export async function createMovie(req: express.Request, res: express.Response) {
     const error = isEditRequestInvalid(req.body)
     console.log(error)
     if (error == null) {
-        const create = await repo.createMovie(req.body.title, new Date(req.body.releaseDate), req.body.genre, req.body.price)
+        const create = await repo.createMovie(
+            req.body.title,
+            new Date(req.body.releaseDate),
+            req.body.genre,
+            req.body.price,
+            req.body.rating
+        )
         console.log(create)
         res.redirect("/movies")
     } else {
