@@ -7,12 +7,18 @@ function toDateInputValue(date: Date) {
 
 export async function showMovieList(req: express.Request, res: express.Response) {
     console.log("showMovieList()")
-    const movies = await repo.getAllSummaries()
+    const genres = await repo.getAllGenres()
+    console.log(genres)
+    const genre = typeof req.query.genre === "string" ? req.query.genre : null;
+    const title = typeof req.query.title === "string" ? req.query.title : null;
+    const movies = await repo.searchSummaries(genre, title)
     res.render("list", {
         movies: movies.map( movie => ({
             ...movie,
-            releaseDate: toDateInputValue(movie.releaseDate)
-        }))
+            releaseDate: toDateInputValue(movie.releaseDate),
+        })),
+        genres,
+        query: { genre, title }
     })
 }
 

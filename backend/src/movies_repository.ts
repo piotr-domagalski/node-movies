@@ -1,6 +1,6 @@
 import { prisma } from "./lib/prisma.js";
 
-export async function getAllSummaries() {
+export async function searchSummaries(genre: string | null = null, title: string | null = null) {
     return prisma.movie.findMany({
         select: {
             id: true,
@@ -8,8 +8,20 @@ export async function getAllSummaries() {
             releaseDate: true,
             genre: true,
             price: true,
+        },
+        where: {
+            ...(genre ? { genre } : {}),
+            ...(title ? { title: {contains: title}} : {}),
         }
     });
+}
+
+export async function getAllGenres() {
+    return (await prisma.movie.findMany({
+        select: { genre: true },
+        orderBy: { genre: "asc" },
+        distinct: ["genre"]
+    })).map((row) => row.genre)
 }
 
 export async function getById(id: number) {

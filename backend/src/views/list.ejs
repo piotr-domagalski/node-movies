@@ -13,9 +13,21 @@
         <%- include('header', {}); %>
         <div class="page-card">
             <h2> Index </h2>
-            <a href="/movies/create"> Create New </a>
             <div class="filter-bar">
-                filter bar placeholder
+                <form method="get", action="/movies">
+                    <label for="genre"> Genre: </label>
+                    <select id="genre" name="genre">
+                        <option value=""> All </option>
+                        <% genres.forEach( genre => { %>
+                        <option value="<%=genre%>" <%= (genre == query.genre) ? "selected" : ""%>> <%=genre%> </option>
+                        <% }) %>
+                    </select>
+                    <label for="title"> Title: </label>
+                    <input class="edit-input-field" type="text" id="title" name="title" value="<%=query.title%>">
+                    <input class="btn-primary" type="submit" id="filter" name="filter" value="Filter" >
+                    <a class="btn-secondary" href="/movies"> Reset </a>
+                </form>
+                <a class="btn-primary" href="/movies/create"> Create New </a>
             </div>
             <table class="movie-list-table">
                 <thead>
@@ -40,7 +52,7 @@
                             </form>
                         </td>
                     </tr>
-                <% }); %>
+                <% }) %>
                 </tbody>
             </table>
         </div>

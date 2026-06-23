@@ -67,6 +67,9 @@ button[type="submit"]:hover {
     background: #0f2ea8;
 }
 
+.btn-secondary {
+}
+
 /* ===== HEADER ===== */
 header {
     display: flex;
@@ -107,6 +110,7 @@ footer {
 .filter-bar {
     display: flex;
     gap: 1rem;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 1.5rem;
@@ -151,19 +155,21 @@ footer {
 
 /* ===== actions ===== */
 /* (to unify button and link visuals) */
-a.list-action, .list-action {
+a.list-action, .list-action, .btn-secondary {
     display: inline-block;
-    padding: 6px 10px;
-    border: 1px solid #eee;
-    border-radius: 4px;
+    background: #f3f4f6;
     text-decoration: none;
-    color: #2563eb;
-    background: #fcfcfc;
     font: inherit;
+    border-radius: 10px;
+    border: none;
+    border-radius: 10px;
+    padding: .65rem 1.25rem;
     cursor: pointer;
+    font-weight: 400;
+    font-size: 1rem;
 }
 
-a.list-action:hover, .list-action:hover {
+a.list-action:hover, .list-action:hover, .btn-secondary:hover {
     background: #eee;
     border-color: #ddd;
     color: #1d4ed8;
@@ -185,10 +191,9 @@ a.list-action:hover, .list-action:hover {
     justify-content: space-around;
 }
 
-.edit-movie-form label {
+label {
     font-weight: 600;
     margin-bottom: .5rem;
-    display: block;
 }
 
 .edit-movie-form div {
@@ -201,7 +206,7 @@ a.list-action:hover, .list-action:hover {
 
 
 /* ===== form controls ===== */
-.edit-input-field input {
+.edit-input-field input, input.edit-input-field, select {
     border: 1px solid #d1d5db;
     border-radius: 10px;
     padding: .75rem 1rem;
@@ -209,9 +214,9 @@ a.list-action:hover, .list-action:hover {
     text-align: right;
 }
 
-.edit-input-field input:focus {
+.edit-input-field input:focus, input.edit-input-field:focus {
     border-color: #2563eb;
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, .15);
+    box-shadow: 0 0 0 5px rgba(37, 99, 235, .15);
 }
 
 td.edit-input-field {
