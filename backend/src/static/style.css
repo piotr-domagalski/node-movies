@@ -10,6 +10,8 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 0;
+    margin: 0;
 }
 
 /* ===== headers ===== */
@@ -167,6 +169,7 @@ a.list-action, .list-action, .btn-secondary {
     cursor: pointer;
     font-weight: 400;
     font-size: 1rem;
+    color: #2563eb;
 }
 
 a.list-action:hover, .list-action:hover, .btn-secondary:hover {
@@ -221,4 +224,19 @@ label {
 
 td.edit-input-field {
     text-align: right;
+}
+
+/* ===== validation ===== */
+.validation-error-icon {
+    cursor: pointer;
+}
+
+#validation-error-summary {
+    background: #fef2f2;
+    border-radius: 10px;
+    color: #dc2626 !important;
+    font-size: .95rem;
+    margin-top: .4rem;
+    display: block;
+    padding: 0.5rem 1rem;
 }

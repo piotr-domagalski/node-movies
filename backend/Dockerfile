@@ -22,11 +22,13 @@ COPY ./prisma.config.ts ./prisma.config.ts
 
 COPY ./tsconfig.json ./
 COPY ./src/lib ./src/lib
+COPY ./src/shared ./src/shared
 COPY ./src/*.ts ./src
 # compile
 RUN ["npx", "tsc"]
 COPY ./src/views ./dist/views
 COPY ./src/static ./dist/static
+RUN cp ./dist/shared/*.js ./dist/static #shell form for the globbing
 
 WORKDIR /usr/app/dist
 ENTRYPOINT ["/sbin/tini", "--"]

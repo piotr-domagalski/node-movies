@@ -3,33 +3,41 @@
     <head>
         <title> Movies App </title>
         <link rel="stylesheet" type="text/css" href="/style.css" title="CSS">
+        <script type="module" src="/formValidation.js"> </script>
     </head>
     <body>
         <%- include('header', {}); %>
         <div class="page-card">
             <h2> <%= title %> </h2>
-            <form class="edit-movie-form" action="<%= action %>" method="post">
+            <form class="edit-movie-form" id="edit-movie-form" action="<%= action %>" method="post">
                 <table>
                     <tr>
                         <td> <label for="title"> Title </label> </td>
                         <td class="edit-input-field"> <input type="text" id="title" name="title" value="<%= movie?.title ?? "" %>"> </td>
+                        <td> <image class="validation-error-icon" id="titleError" src="/warningSmall.svg" style="visibility: hidden;"> </td>
                     </tr>
                     <tr>
                         <td> <label for="releaseDate"> Release Date </label> </td>
                         <td class="edit-input-field"> <input type="date" id="releaseDate" name="releaseDate" value="<%= movie?.releaseDate ?? "" %>"> <br> </td>
+                        <td> <image class="validation-error-icon" id="releaseDateError" src="/warningSmall.svg" style="visibility: hidden;"> </td>
                     </tr>
                     <tr>
                         <td> <label for="genre"> Genre </label></td>
                         <td class="edit-input-field"> <input type="text" id="genre" name="genre" value="<%= movie?.genre ?? "" %>"> <br> </td>
+                        <td> <image class="validation-error-icon" id="genreError" src="/warningSmall.svg" style="visibility: hidden;"> </td>
                     </tr>
                     <tr>
                         <td> <label for="price"> Price </label></td>
                         <td class="edit-input-field"> <input type="number" step="0.01" id="price" name="price" value="<%= movie?.price ?? "" %>"> <br> </td>
+                        <td> <image class="validation-error-icon" id="priceError" src="/warningSmall.svg" style="visibility: hidden;"> </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <input class="btn-primary" type="submit" 
-                                id="submit" name="submit" value="<%= submitPrompt %>" >
+                        <td colspan="3"> <p id="validation-error-summary" style="visibility: hidden;"> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <input class="btn-primary" type="submit"
+                                id="submit" name="submit" value="<%= submitPrompt %>">
                         </td>
                     </tr>
                 </table>

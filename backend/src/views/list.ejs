@@ -14,7 +14,7 @@
         <div class="page-card">
             <h2> Index </h2>
             <div class="filter-bar">
-                <form method="get", action="/movies">
+                <form method="get" action="/movies">
                     <label for="genre"> Genre: </label>
                     <select id="genre" name="genre">
                         <option value=""> All </option>
@@ -47,7 +47,7 @@
                         <td> <a class="list-action" href=<%=`/movies/${movie.id}/edit`%>> Edit </a> </td>
                         <td> <a class="list-action" href=<%=`/movies/${movie.id}`%>> Details </a> </td>
                         <td>
-                            <form method="post", action="movies/<%=movie.id%>/delete">
+                            <form method="post" action="movies/<%=movie.id%>/delete">
                                 <input class="list-action" id="list-action-delete" type="submit" value="Delete" onclick="return confirmDelete('<%=movie.title%>', '<%=movie.id%>');">
                             </form>
                         </td>
