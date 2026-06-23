@@ -6,36 +6,44 @@
         function confirmDelete(movie, id) {
             return confirm(`Are you sure you want to delete ${movie} (id ${id})?`)
         }
-        </script
+        </script>
+        <link rel="stylesheet" type="text/css" href="/style.css" title="CSS">
     </head>
     <body>
         <%- include('header', {}); %>
-        <h1> Index </h1>
-        <a href="/movies/create"> Create New </a>
-        <table>
-            <tr>
-                <td> Title </td>
-                <td> Release Date </td>
-                <td> Genre </td>
-                <td> Price </td>
-                <td> </td>
-            </tr>
-        <% movies.forEach( movie => { %>
-            <tr>
-                <td> <%= movie.title %> </td>
-                <td> <%= movie.releaseDate %> </td>
-                <td> <%= movie.genre %> </td>
-                <td> <%= movie.price %> </td>
-                <td>
-                    <a href=<%=`/movies/${movie.id}/edit`%>> Edit </a> |
-                    <a href=<%=`/movies/${movie.id}`%>> Details </a> |
-                    <form method="post", action="movies/<%=movie.id%>/delete">
-                        <input type="submit" value="Delete" onclick="return confirmDelete('<%=movie.title%>', '<%=movie.id%>');">
-                    </form>
-                </td>
-            </tr>
-        <% }); %>
-        </table>
+        <div class="page-card">
+            <h2> Index </h2>
+            <a href="/movies/create"> Create New </a>
+            <div class="filter-bar">
+                filter bar placeholder
+            </div>
+            <table class="movie-list-table">
+                <thead>
+                    <td> Title </td>
+                    <td> Release Date </td>
+                    <td> Genre </td>
+                    <td> Price </td>
+                    <td colspan="3"> </td>
+                </thead>
+                <tbody>
+                <% movies.forEach( movie => { %>
+                    <tr>
+                        <td> <%= movie.title %> </td>
+                        <td> <%= movie.releaseDate %> </td>
+                        <td> <%= movie.genre %> </td>
+                        <td> <%= movie.price %> </td>
+                        <td> <a class="list-action" href=<%=`/movies/${movie.id}/edit`%>> Edit </a> </td>
+                        <td> <a class="list-action" href=<%=`/movies/${movie.id}`%>> Details </a> </td>
+                        <td>
+                            <form method="post", action="movies/<%=movie.id%>/delete">
+                                <input class="list-action" id="list-action-delete" type="submit" value="Delete" onclick="return confirmDelete('<%=movie.title%>', '<%=movie.id%>');">
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
         <%- include('footer', {}); %>
     </body>
 </html>

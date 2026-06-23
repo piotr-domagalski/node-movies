@@ -26,6 +26,7 @@ COPY ./src/*.ts ./src
 # compile
 RUN ["npx", "tsc"]
 COPY ./src/views ./dist/views
+COPY ./src/static ./dist/static
 
 WORKDIR /usr/app/dist
 ENTRYPOINT ["/sbin/tini", "--"]

@@ -2,23 +2,40 @@
 <html>
     <head>
         <title> Movies App </title>
+        <link rel="stylesheet" type="text/css" href="/style.css" title="CSS">
     </head>
     <body>
         <%- include('header', {}); %>
-        <h1> <%= title %> </h1>
-
-        <form action="<%= action %>" method="post">
-            <label for="title"> Title </label>
-            <input type="text" id="title" name="title" value="<%= movie?.title ?? "" %>"> <br>
-            <label for="releaseDate"> Release Date </label> 
-            <input type="date" id="releaseDate" name="releaseDate" value="<%= movie?.releaseDate ?? "" %>"> <br>
-            <label for="genre"> Genre </label>
-            <input type="text" id="genre" name="genre" value="<%= movie?.genre ?? "" %>"> <br>
-            <label for="price"> Price </label>
-            <input type="number" step="any" id="price" name="price" value="<%= movie?.price ?? "" %>"> <br>
-            <input type="submit" id="submit" name="submit" value="<%= submitPrompt %>" >
-        </form>
-        <a href="/movies"> Return to list </a>
+        <div class="page-card">
+            <h2> <%= title %> </h2>
+            <form class="edit-movie-form" action="<%= action %>" method="post">
+                <table>
+                    <tr>
+                        <td> <label for="title"> Title </label> </td>
+                        <td class="edit-input-field"> <input type="text" id="title" name="title" value="<%= movie?.title ?? "" %>"> </td>
+                    </tr>
+                    <tr>
+                        <td> <label for="releaseDate"> Release Date </label> </td>
+                        <td class="edit-input-field"> <input type="date" id="releaseDate" name="releaseDate" value="<%= movie?.releaseDate ?? "" %>"> <br> </td>
+                    </tr>
+                    <tr>
+                        <td> <label for="genre"> Genre </label></td>
+                        <td class="edit-input-field"> <input type="text" id="genre" name="genre" value="<%= movie?.genre ?? "" %>"> <br> </td>
+                    </tr>
+                    <tr>
+                        <td> <label for="price"> Price </label></td>
+                        <td class="edit-input-field"> <input type="number" step="0.01" id="price" name="price" value="<%= movie?.price ?? "" %>"> <br> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input class="btn-primary" type="submit" 
+                                id="submit" name="submit" value="<%= submitPrompt %>" >
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <a href="/movies"> Return to list </a>
+        </div>
         <%- include('footer', {}); %>
     </body>
 </html>

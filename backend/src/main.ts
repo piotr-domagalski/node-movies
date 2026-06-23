@@ -13,6 +13,7 @@ async function main() {
     app.use(express.urlencoded({ extended: true }));
     app.set("view engine", "ejs");
 
+    app.use(express.static('static'));
 
     let counter: number = 0;
 
