@@ -34,8 +34,19 @@ export async function showMovieList(req: express.Request, res: express.Response)
 
 export async function showMovieDetails(req: express.Request, res: express.Response) {
     console.log("showMovieDetails()")
-    const movieDetails = await repo.getById(Number(req.params.id))
-    res.send(JSON.stringify(movieDetails, null, 2))
+    const id: number = Number(req.params.id)
+    const movieDetails = await repo.getById(id)
+    if (movieDetails == undefined) {
+        res.send(`Invalid movie ${id}`)
+        return
+    } else {
+        res.render("details", {
+            movie: {
+                ...movieDetails,
+                releaseDate: toDateInputValue(movieDetails.releaseDate),
+            }
+        })
+    }
 }
 
 export async function showEditForm(req: express.Request, res: express.Response) {
